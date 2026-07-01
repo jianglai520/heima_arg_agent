@@ -3,7 +3,6 @@ import os
 
 client = OpenAI(
     # 如果没有配置环境变量，请用阿里云百炼API Key替换：api_key="sk-xxx"
-    api_key="sk-ws-H.RXIPRXI.08HK.MEUCIQDbv291-ACiKvkl7uktr-Dp2zgbRn41FLH7lJpAHyQOKQIgdTuEE_I4fRCX3QZVflfRafCpvGvflYPAzCdgcSUhFdk",
     base_url="https://ws-3ssufixwbthuxno3.cn-beijing.maas.aliyuncs.com/compatible-mode/v1",
 )
 
