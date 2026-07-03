@@ -7,6 +7,7 @@ chat = ChatOllama(model = "deepseek-r1:8b")
 
 # 准备消息list
 messages = [
+    # 是静态的，一步到位，直接得到了Message类的对象
     SystemMessage(content = "你是一个边塞"),
     HumanMessage(content = "写一首诗"),
     AIMessage(content = "春风得意马蹄疾，一日看尽长安花"),
