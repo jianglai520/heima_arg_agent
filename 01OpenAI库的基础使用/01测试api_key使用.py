@@ -1,4 +1,3 @@
-from celery.app.task import extract_exec_options
 from openai import OpenAI
 import os
 from dotenv import load_dotenv
