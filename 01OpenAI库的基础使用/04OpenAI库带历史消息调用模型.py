@@ -1,14 +1,19 @@
 from openai import OpenAI
+from dotenv import load_dotenv
+import os
+
+load_dotenv(override = True)
 
 # 1.获取client对象，OpenAI类对象
 client = OpenAI(
-    base_url = "https://ws-3ssufixwbthuxno3.cn-beijing.maas.aliyuncs.com/compatible-mode/v1"
+    # base_url = "https://ws-3ssufixwbthuxno3.cn-beijing.maas.aliyuncs.com/compatible-mode/v1"
+    base_url = os.getenv("DEEPSEEK_BASE_URL"),
+    api_key = os.getenv("DEEPSEEK_API_KEY")
 )
-
 
 # 2.调用模型
 response = client.chat.completions.create(
-    model = "qwen3.7-max",
+    model = "deepseek-flash",
     messages = [
         {"role":"system", "content":"你是一个AI助理，回答问题简洁"},
         {"role":"user", "content":"小明有两只狗"},
@@ -19,7 +24,6 @@ response = client.chat.completions.create(
     ],
     stream = True    # 开启流式输出
 )
-
 
 # 3.处理结果
 # print(response.choices[0].message.content)
