@@ -3,12 +3,12 @@ from langchain_core.messages import HumanMessage, SystemMessage, AIMessage
 
 
 # 初始化模型(用聊天模型)
-chat = ChatOllama(model = "deepseek-r1:8b")
+chat = ChatOllama(model = "deepseek-r1:1.5b")   # ollama本地模型
 
 # 准备消息list
 messages = [
     # 是静态的，一步到位，直接得到了Message类的对象
-    SystemMessage(content = "你是一个边塞"),
+    SystemMessage(content = "你是一个边塞诗人"),
     HumanMessage(content = "写一首诗"),
     AIMessage(content = "春风得意马蹄疾，一日看尽长安花"),
     HumanMessage(content = "按照上面这两句，写两句唐诗")
