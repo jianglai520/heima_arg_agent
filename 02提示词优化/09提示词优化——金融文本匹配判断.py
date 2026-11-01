@@ -1,10 +1,16 @@
 # 关联性判断
-
 from openai import OpenAI
+from dotenv import load_dotenv
+import os
+
+load_dotenv(override = True)
 
 client = OpenAI(
-    base_url="https://dashscope.aliyuncs.com/compatible-mode/v1"
+    # base_url="https://dashscope.aliyuncs.com/compatible-mode/v1"
     # base_url="http://localhost:11434/v1"
+
+    base_url = os.getenv("DEEPSEEK_BASE_URL"),
+    api_key = os.getenv("DEEPSEEK_API_KEY")
 )
 
 examples_data = {
@@ -45,46 +51,21 @@ messages = [
 ]
 
 
-for example in examples_data.items():
-    for t in example[1]:
+for key, value in examples_data.items():
+    for t in value:
         messages.append(
             {"role": "user", "content": f"句子1：[{t[0]}]，句子2：[{t[1]}]"}
         )
         messages.append(
-            {"role": "assistant", "content": example[0]}
+            {"role": "assistant", "content": key}
         )
 
 
 for q in questions:
     response = client.chat.completions.create(
-        model = "qwen3.7-max",
-        messages = messages + [{"role":"user", "content":f"句子1：[{q[0]}], 句子2:[{q[1]}]"}]
+        # model = "qwen3.7-max",
+        model = "deepseek-flash",
+        messages = messages + [{
+            "role":"user", "content":f"句子1：[{q[0]}], 句子2:[{q[1]}]"}]
     )
     print(response.choices[0].message.content)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
