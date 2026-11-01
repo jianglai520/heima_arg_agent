@@ -1,6 +1,5 @@
 from langchain_ollama import OllamaEmbeddings
 
-
 # 初始化嵌入模型对象，其默认使用模型是：text-embedding-v1
 embed = OllamaEmbeddings(model = "qwen3-embedding:0.6b")
 
