@@ -22,7 +22,7 @@ completion = client.chat.completions.create(
     model = "deepseek-flash",
     messages = messages,
     # extra_body = {"enable_thinking": True},
-    extra_body = {"thinking": {"type": "disabled"}},
+    extra_body = {"thinking": {"type": "disabled"}},   # deepseek模型关闭思考模式比较特殊，务必注意
     stream = True
 )
 
