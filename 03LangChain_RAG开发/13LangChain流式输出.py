@@ -12,9 +12,9 @@
 
 from langchain_ollama import OllamaLLM
 
-model = OllamaLLM(model="deepseek-r1:8b")
+model = OllamaLLM(model="deepseek-r1:1.5b")
 
-res = model.stream(input = "请写一个关于机器学习的段落")
+res = model.stream(input = "请详细介绍一下深度学习和机器学习的异同")
 
 for chunk in res:
     print(chunk, end = "", flush = True)
