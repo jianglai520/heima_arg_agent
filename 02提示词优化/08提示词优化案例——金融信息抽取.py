@@ -2,8 +2,8 @@ from openai import OpenAI
 import json
 
 client = OpenAI(
-    base_url="https://dashscope.aliyuncs.com/compatible-mode/v1"
-    # base_url="http://localhost:11434/v1"
+    # base_url="https://dashscope.aliyuncs.com/compatible-mode/v1"
+    base_url="http://localhost:11434/v1"   # 使用Ollama本地模型
 )
 
 schema = ['日期', '股票名称', '开盘价', '收盘价', '成交量']
@@ -29,6 +29,7 @@ examples_data = [  # 示例数据
         }
     }
 ]
+
 questions = [  # 提问问题
     "2025-06-16，股市利好。股票传智教育A股今日开盘价66人民币，一度飙升至70人民币，随后回落至65人民币，最终以68人民币收盘，成交量达到123000。",
     "2025-06-06，股市利好。股票黑马程序员A股今日开盘价200人民币，一度飙升至211人民币，随后回落至201人民币，最终以206人民币收盘。"
@@ -49,7 +50,7 @@ questions = [  # 提问问题
 
 
 messages = [
-    {"role": "system",      "content": f"你帮我完成信息抽取，我给你句子，你抽取{schema}信息，按JSON字符串输出，如果某些信息不存在，用'原文未提及'表示，请参考如下示例："}
+    {"role": "system", "content": f"你帮我完成信息抽取，我给你句子，你抽取{schema}信息，按JSON字符串输出，如果某些信息不存在，用'原文未提及'表示，请参考如下示例："}
 ]
 
 for example in examples_data:
@@ -57,12 +58,13 @@ for example in examples_data:
         {"role": "user", "content": example["content"]}
     )
     messages.append(
-        {"role": "assistant", "content": json.dumps(example["answers"], ensure_ascii=False)}
+        {"role": "assistant", "content": json.dumps(example["answers"], ensure_ascii=False)}  # ensure_ascii规避中文乱码
     )
 
 for q in questions:
     response = client.chat.completions.create(
-        model = "qwen3.7-max",
-        messages = messages + [{"role": "user", "content": q}]
+        # model = "qwen3.7-max",
+        model = "deepseek-r1:1.5b",
+        messages = messages + [{"role": "user", "content": f"按照上述的实例，现在抽取这个句子的信息:{q}"}]
     )
     print(response.choices[0].message.content)
