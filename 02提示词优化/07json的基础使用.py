@@ -9,7 +9,7 @@ d = {
 }
 
 dd = json.dumps(d, ensure_ascii = False)    # ensure_ascii = False 避免中文乱码
-print(dd)   # 标准的json格式都是双引号
+print(dd)   # 标准的json格式都是双引号（注意点）
 
 # python列表
 ll = [
