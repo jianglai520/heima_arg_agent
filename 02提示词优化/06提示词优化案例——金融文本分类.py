@@ -1,8 +1,14 @@
 from openai import OpenAI
+from dotenv import load_dotenv
+import os
+
+load_dotenv(override = True)
 
 # 1.获取client对象,OpenAI类对象
 client = OpenAI(
-    base_url = "https://ws-3ssufixwbthuxno3.cn-beijing.maas.aliyuncs.com/compatible-mode/v1"
+    # base_url = "https://ws-3ssufixwbthuxno3.cn-beijing.maas.aliyuncs.com/compatible-mode/v1"
+    base_url = os.getenv("DEEPSEEK_BASE_URL"),
+    api_key = os.getenv("DEEPSEEK_API_KEY")
 )
 
 examples_data = {  # 示例数据
@@ -11,6 +17,7 @@ examples_data = {  # 示例数据
     '公司公告': '本公司高兴地宣布成功完成最新一轮并购交易，收购了一家在人工智能领域领先的公司。这一战略举措将有助于扩大我们的业务领域，提高市场竞争力',
     '分析师报告': '最新的行业分析报告指出，科技公司的创新将成为未来增长的主要推动力。云计算、人工智能和数字化转型被认为是引领行业发展的关键因素，投资者应关注这些趋势'
 }
+
 # 分类列表
 examples_types = ['新闻报道', '财务报道', '公司公告', '分析师报告']
 
@@ -20,7 +27,7 @@ questions = [
     "ABC公司今日发布公告称，已成功完成对XYZ公司股权的收购交易。本次交易是ABC公司在扩大业务范围、加强市场竞争力方面的重要举措。据悉，此次收购将进一步巩固ABC公司在行业中的地位，并为未来业务发展提供更广阔的发展空间。详情请见公司官方网站公告栏",
     "公司资产负债表显示，公司偿债能力强劲，现金流充足，为未来投资和扩张提供了坚实的财务基础。",
     "最新的分析报告指出，可再生能源行业预计将在未来几年经历持续增长，投资者应该关注这一领域的投资机会",
-    "小明喜欢小新哟"
+    "小明喜欢小园哟"
 ]
 
 """
@@ -42,18 +49,18 @@ questions = [
 
 
 messages = [
-    {"role": "system", "content": "你是金融专家，将文本分类为{}，不清楚的分类为'不清楚类别' 下面有示例：".format(examples_types)}
+    {"role": "system", "content": f"你是金融专家，将文本分类为{examples_types}，不清楚的分类为'不清楚类别' 下面有示例："}
 ]
 
 
-for key, value in examples_data.items():
+for key, value in examples_data.items():  # 一次性拿到key value
     messages.append({"role":"user", "content":value})
     messages.append({"role":"assistant", "content":key})
 
-# 向模型提问
+# 2.向模型提问
 for q in questions:
     response = client.chat.completions.create(
-        model = "qwen3.7-max",
+        model = "deepseek-flash",
         messages = messages + [{"role":"user", "content":q}],   # 添加提问
     )
     print(response.choices[0].message.content)
