@@ -19,7 +19,7 @@ response = client.chat.completions.create(
     model = "deepseek-flash",
     messages = [
         {"role":"system", "content":"你是一个python专家，回答问题简明扼要"},
-        {"role":"assistant", "content":"好的，我是编程专家，并且回答问题简明扼要"},
+        {"role":"assistant", "content":"好的，我是编程专家，并且回答问题简明扼要"},  # 手动设置AI回复
         {"role":"user", "content":"输出1-10的数字，用python代码"}
     ]   # 列表里面嵌套字典
 )
