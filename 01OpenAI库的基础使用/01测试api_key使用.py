@@ -1,20 +1,31 @@
+from celery.app.task import extract_exec_options
 from openai import OpenAI
 import os
+from dotenv import load_dotenv
+
+load_dotenv(override = True)
 
 client = OpenAI(
     # 如果没有配置环境变量，请用阿里云百炼API Key替换：api_key="sk-xxx"
     # base_url="https://ws-3ssufixwbthuxno3.cn-beijing.maas.aliyuncs.com/compatible-mode/v1",
-    base_url="http://localhost:11434/v1",
+    # base_url="http://localhost:11434/v1",
+
+    # 调用deepseek大模型
+    api_key = os.getenv("DEEPSEEK_API_KEY"),
+    base_url = os.getenv("DEEPSEEK_BASE_URL")
 )
 
 messages = [{"role": "user", "content": "你可以做什么"}]  # list结构 角色：assistant(代表AI助手的回答) system user(代表用户，发送问题、指令或者需求)
 completion = client.chat.completions.create(
-    # model="qwen3.7-max",  # 您可以按需更换为其它深度思考模型
-    model = "deepseek-r1:8b",
-    messages=messages,
-    extra_body={"enable_thinking": True},
-    stream=True
+    # model = "qwen3.7-max",  # 您可以按需更换为其它深度思考模型
+    # model = "deepseek-r1:8b",
+    model = "deepseek-flash",
+    messages = messages,
+    # extra_body = {"enable_thinking": True},
+    extra_body = {"thinking": {"type": "disabled"}},
+    stream = True
 )
+
 is_answering = False  # 是否进入回复阶段
 print("\n" + "=" * 20 + "思考过程" + "=" * 20)
 for chunk in completion:
