@@ -47,17 +47,3 @@ print(res_dict, type(res_dict))
 
 res_list = json.loads(json_array_str)
 print(res_list, type(res_list))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
