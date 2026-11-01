@@ -2,17 +2,14 @@ import numpy as np
 
 def get_dot(a, b):
     """计算2个向量的点积，2个向量同维度数字乘积之和"""
-    dot_sum = 0
     if len(a) != len(b):
-        raise ValueError("两个向量必须维度相同")
-    for a, b in zip(a, b):
-        dot_sum += a * b
-    return dot_sum
+        raise ValueError("两个向量必须维度相同")  # 抛异常(ValueError) -- 类型对，但值不合理
+    return sum(x * y for x, y in zip(a, b))
 
-def get_norm(x):
+def get_norm(vector):
     """计算单个向量的模长"""
     sum_square = 0
-    for v in x:
+    for v in vector:
         sum_square += v ** 2
     return np.sqrt(sum_square)
 
@@ -28,7 +25,8 @@ def cosine_similarity(a, b):
 
 if __name__ == '__main__':
     a = (1, 2, 3)
-    b = (2, 3, 4)
+    b = (2, 158, 4)
     c = (2, 4, 6)
     cosine_similarity(a, b)
     cosine_similarity(a, c)
+    cosine_similarity(b, c)
