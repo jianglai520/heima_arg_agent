@@ -10,7 +10,6 @@ class Test(object):
         return MySequence(self ,other)   # __or__方法返回的是MySequence类对象
 
 
-
 class MySequence(object):
     def __init__(self, *args):   # *args表示接受任意数量的参数--可变参数
         self.sequence = []
@@ -32,7 +31,6 @@ if __name__ == '__main__':
     c = Test('c')
     # print(a == b)
 
-    d = a | b | c  # a.__or__(b)
+    d = a | b | c  # [a, b, c]
     d.run()
     print(type(d))
-
