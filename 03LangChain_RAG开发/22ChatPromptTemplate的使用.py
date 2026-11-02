@@ -1,12 +1,10 @@
-from langchain_classic.chains.question_answering.refine_prompts import chat_qa_prompt_template
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain_community.chat_models.tongyi import ChatTongyi
-
+from langchain_ollama import ChatOllama
 
 chat_prompt_template = ChatPromptTemplate.from_messages(
     [
-        ("system", "你是一个边塞诗人，可以作诗"),
-        MessagesPlaceholder("histoty"),
+        ("system", "你是一个唐朝诗人，可以作诗"),
+        MessagesPlaceholder("history"),
         ("human", "请再来一首唐诗"),
 
     ]
@@ -19,11 +17,12 @@ history_data = [
     ("ai","春风得以马蹄疾，一日看尽长安花"),
 ]
 
-
 # StringPromptTemplate
-prompt_text = chat_prompt_template.invoke(input = {"histoty":history_data}).to_string()
+# 注意：必须是invoke，format无法注入
+prompt_text = chat_prompt_template.invoke(input = {"history":history_data}).to_string()
 # print(prompt_text)
 
-model = ChatTongyi(model = "qwen3.7-max")
+model = ChatOllama(model = "deepseek-r1:1.5b")  # 调用ollama本地模型
 res = model.invoke(input = prompt_text)
-print(res.content, type(res))
+print(res.content)
+print(type(res))
