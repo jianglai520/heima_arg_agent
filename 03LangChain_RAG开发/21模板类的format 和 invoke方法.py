@@ -9,11 +9,10 @@ ChatPromptTemplate -> BaseChatPromptTemplate -> BasePromptTemplate -> RunnableSe
 
 template = PromptTemplate.from_template("我的邻居姓{lastname},刚生了{gender},你帮我起名字，简单回答。")
 
-
 # format得到的是字符串
-res = template.format(lastname = "张", gender = "男孩儿")
+res = template.format(lastname = "张", gender = "男孩儿")   # 传参上format支持k,v形式
 print(res, type(res))
 
 # invoke得到的是PromptValue类对象
-res1 = template.invoke({"lastname": "王", "gender": "女孩儿"})
+res1 = template.invoke({"lastname": "王", "gender": "女孩儿"})  # 传参上invoke支持字典 "k":v格式
 print(res1, type(res1))
