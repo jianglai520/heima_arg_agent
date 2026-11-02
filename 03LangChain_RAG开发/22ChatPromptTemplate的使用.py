@@ -17,10 +17,11 @@ history_data = [
     ("ai","春风得以马蹄疾，一日看尽长安花"),
 ]
 
-# StringPromptTemplate
+# StringPromptValue
 # 注意：必须是invoke，format无法注入
 prompt_text = chat_prompt_template.invoke(input = {"history":history_data}).to_string()
-# print(prompt_text)
+print(prompt_text)
+# print(type(prompt_text))
 
 model = ChatOllama(model = "deepseek-r1:1.5b")  # 调用ollama本地模型
 res = model.invoke(input = prompt_text)
