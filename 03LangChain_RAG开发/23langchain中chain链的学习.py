@@ -30,4 +30,4 @@ chain = chat_prompt_template | model
 
 # 通过流式输出
 for chunk in chain.stream(input = {"history":history_data}):
-    print(chunk.content, end = "", flush = True)
+    print(chunk.content, end = "", flush = True)  # 立即刷新输出缓冲区
