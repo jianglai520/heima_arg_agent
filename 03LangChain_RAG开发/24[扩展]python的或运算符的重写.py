@@ -31,6 +31,6 @@ if __name__ == '__main__':
     c = Test('c')
     # print(a == b)
 
-    d = a | b | c  # [a, b, c]
+    d = a | b | c  # a.__or__(b)
     d.run()
     print(type(d))
