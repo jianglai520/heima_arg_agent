@@ -26,7 +26,7 @@ loader = JSONLoader(
     file_path = "./data/stu_json_lines.json",
     jq_schema = ".",
     text_content = False,
-    json_lines = True    # 告知JSONLoader 这是一个JSONLines文件（不是标准的JSON文件）
+    json_lines = True    # 告知JSONLoader 这是一个JSONLines文件（不是标准的JSON文件） -- 每一行都是一个独立的字典（JSON对象）
 )
 
 document = loader.load()
