@@ -1,0 +1,7 @@
+Python 标准库 json 模块提供了 JSON 与 Python 对象之间的相互转换。
+
+函数	            作用	                        方向
+json.dumps()	Python 对象 → JSON字符串	    序列化
+json.loads()	JSON 字符串 → Python对象	    反序列化
+json.dump()	    Python 对象 → 写入文件	    序列化
+json.load()	    从文件读取 → Python 对象	    反序列化
