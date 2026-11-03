@@ -1,0 +1,42 @@
+# ========== 密钥 / 配置 ==========
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ========== Python ==========
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+.eggs/
+build/
+dist/
+pip-wheel-metadata/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# ========== 运行时产物 ==========
+# Chroma 向量库持久化目录
+03LangChain_RAG开发/chroma_db/
+# 长期会话记忆文件
+03LangChain_RAG开发/chat_history/
+
+# ========== IDE / 编辑器 ==========
+.idea/
+.vscode/
+*.iml
+*.swp
+*~
+
+# ========== 操作系统 ==========
+.DS_Store
+Thumbs.db
+desktop.ini
