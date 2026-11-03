@@ -1,13 +1,12 @@
 # memory长期会话记忆
 import os, json
-from langchain_core.messages import message_to_dict, messages_to_dict, messages_from_dict
+from langchain_core.messages import message_to_dict, messages_from_dict
 from langchain_core.chat_history import BaseChatMessageHistory
 from openpyxl.descriptors import Sequence
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables.history import RunnableWithMessageHistory
-from langchain_core.chat_history import InMemoryChatMessageHistory
 from langchain_ollama import ChatOllama
-from langchain_core.prompts import PromptTemplate, ChatPromptTemplate, MessagesPlaceholder
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 
 # message_to_dict:单个消息对象转换为字典（BaseMessage类实例）
 # messages_from_dict:字典转换为消息对象 [字典、字典...] -> [消息、消息...]
